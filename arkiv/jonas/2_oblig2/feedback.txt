@@ -1,0 +1,18 @@
+
+
+Programmet kompilerer og kjører fint👍
+
+TestLegemiddel ser veldig bra ut. Her kan du ha flere test-metoder, men jeg ser at du har skjønt poenget med enhetstester. For TestResepter kunne du ha gjort det samme.
+
+Datastrukturtegningene ser ganske bra ut, men inneholder noen små feil:
+
+    Abstrakte klasser skal representeres med striplet firkant og du trenger ikke å ta med klassen Object (A1 & B1).
+    De statiske teller variablene i Legemiddel og Resept, samt main-metoden, må også være med i tegningen (del E).
+
+Ellers ser det bra ut :)
+
+NB! Gjerne ha én fil for hver klasse. Dette gjør at koden blir mer oversiktlig, spesielt hvis man skal utvide klassene etterhvert.
+
+Bra jobba👏 Skulle det være noe er det bare å sende en mail til majidj@ifi.uio.no.
+Lykke til med neste innlevering!
+
