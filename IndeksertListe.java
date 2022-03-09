@@ -1,29 +1,8 @@
+/**
+ * Denne klassen utvider Lenkeliste-klassen med muligheten for
+ * aa indeksere listen.
+ */
 public class IndeksertListe<T> extends Lenkeliste<T> {
-
-    /**
-     * Denne metoden utfoeres hvis ingen pos blir spesifisert,
-     * og legger til den nye noden sist i lista.
-     */
-    public void leggTil(T x){
-        
-        Node nyNode = new Node(x);
-        
-        // Spesialtilfelle: Listen er tom
-        if (this.start== null){
-            this.start = nyNode;
-        }
-
-        // Listen er ikke tom
-        // --> sett nyNode som neste til siste noden i lista
-        else{
-        Node sisteNode = super.hentNode(this.stoerrelse() - 1);
-        sisteNode.neste = nyNode;
-        }
-
-        // Inkrementer antallNoder
-        super.antallNoder ++;
-        
-    }
 
     /**
      * Denne metoden setter inn x i posisjon pos.
@@ -79,10 +58,10 @@ public class IndeksertListe<T> extends Lenkeliste<T> {
      * Denne metoden erstatter elementet i posisjon pos med x.
      */
     public void sett(int pos, T x) throws UgyldigListeindeks{
-        //
+        
         // Sjekker om pos er en gyldig indeks.
         if (!super.gyldigIndeks(pos, "sett")){
-        throw new UgyldigListeindeks(pos);
+            throw new UgyldigListeindeks(pos);
         }
         
         // Hvis ja: Oppretter ny node
@@ -133,7 +112,7 @@ public class IndeksertListe<T> extends Lenkeliste<T> {
         
         // Sjekker om pos er en gyldig indeks.
         if (!super.gyldigIndeks(pos, "hent")){
-        throw new UgyldigListeindeks(pos);
+            throw new UgyldigListeindeks(pos);
         }
 
         // Hent node og data paa posisjon pos
@@ -152,7 +131,7 @@ public class IndeksertListe<T> extends Lenkeliste<T> {
 
         // Sjekker om pos er en gyldig indeks.
         if (!super.gyldigIndeks(pos, "fjern")){
-        throw new UgyldigListeindeks(pos);
+            throw new UgyldigListeindeks(pos);
         }
 
 
@@ -190,10 +169,10 @@ public class IndeksertListe<T> extends Lenkeliste<T> {
             foran.neste = bak;
         }
 
-        // oppdater antall noder
+        // Oppdater antall noder
         super.antallNoder --;
 
-        // returner data
+        // Returner data
         return res;
 
     }

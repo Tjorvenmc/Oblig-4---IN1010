@@ -22,7 +22,7 @@ public class Prioritetskoe<T extends Comparable<T>> extends Lenkeliste<T> {
         
             Node aktuellNode = super.hentNode(i);
 
-            if (aktuellNode.compareTo(nyNode) >= 0){
+            if (aktuellNode.data.compareTo(nyNode.data) >= 0){
                 stoerreFunnetIndeks = i;
                 stoerreFunnet = true;
                 break;
