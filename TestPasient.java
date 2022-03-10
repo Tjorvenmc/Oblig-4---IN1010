@@ -8,7 +8,7 @@ public class TestPasient{
 
         Vanlig ibux = new Vanlig("Ibux", 39, 50);
 
-        HvitResept mittResept = new HvitResept(ibux, minLege, 1, 3);
+        HvitResept mittResept = new HvitResept(ibux, minLege, minPasient, 3);
         
         minPasient.leggTilResept(mittResept);
         
