@@ -6,7 +6,7 @@ public abstract class Resept{
     protected int id;
     protected Legemiddel legemiddel;
     protected Lege utskrivendeLege;
-    protected int pasientId;
+    protected Pasient pasient;
     protected int reit;
 
     protected static int sisteId;
@@ -16,14 +16,14 @@ public abstract class Resept{
     /**
      * KONSTRUKTOER
      */
-    public Resept(Legemiddel legemiddel, Lege utskrivendeLege, int pasientId,
+    public Resept(Legemiddel legemiddel, Lege utskrivendeLege, Pasient pasient,
             int reit){
 
         sisteId++;
 
         this.legemiddel = legemiddel;
         this.utskrivendeLege = utskrivendeLege;
-        this.pasientId = pasientId;
+        this.pasient = pasient;
         this.reit = reit;
 
         this.id = sisteId;

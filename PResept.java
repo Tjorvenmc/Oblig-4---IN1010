@@ -6,8 +6,8 @@ class PResept extends HvitResept{
     static final int RABATT = 108;
 
     public PResept(Legemiddel legemiddel, Lege utskrivendeLege,
-            int pasientId, int reit){
-        super(legemiddel, utskrivendeLege, pasientId, reit);
+            Pasient pasient, int reit){
+        super(legemiddel, utskrivendeLege, pasient, reit);
     }
 
     @Override
