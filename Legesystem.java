@@ -17,7 +17,7 @@ public class Legesystem{
         File innlesningsFil = new File(filnavn);
         Scanner sc = new Scanner(innlesningsFil);
 
-        String modus = null;
+        String innlesningsModus = null;
 
         // Gaa gjennom linjene i filene
         while (sc.hasNextLine()){
@@ -25,93 +25,142 @@ public class Legesystem{
             String linje = sc.nextLine();
 
             // Linjen begynner med #
-            if linje.charAt(0).equals("#"){
+            // --> setter innlesningsModus
+            if (linje.charAt(0) == '#'){
                 String[] biter = linje.split(" ");
-                modus = biter[1];
+                innlesningsModus = biter[1];
             }
 
             // Linjen begynner ikke med #
             else{
-                String[] biter = linje.split(",");
 
                 // Pasienter ...
-                if (modus.equals("Pasienter")){
-                    Pasient p = new Pasient(biter[0], biter[1]);
-                    pasienter.leggTil(p);
+                if (innlesningsModus.equals("Pasienter")){
+
+                    lesInnPasient(linje);
+
                 }
 
                 // Legemidler ...
-                else if (modus.equals("Legemidler")){
+                else if (innlesningsModus.equals("Legemidler")){
 
-                    if (biter[1].equals("vanlig")){
-                        Vanlig v = new Vanlig(biter[0], biter[2], biter[3]);
-                        legemidler.feggTil(v);
-                    }
+                    lesInnLegemiddel(linje);
 
-                    else if (biter[1].equals("narkotisk")){
-                        Narkotisk n = new Narkotisk(biter[0], biter[2], biter[3],
-                                biter[4]);
-                        legemidler.leggTil(n);
-                    }
-
-                    else if (biter[1].equals("vanedannende")){
-                        Vanedannende v = new Vanedannende(biter[0], biter[2], biter[3],
-                                biter[4]);
-                        legemidler.leggTil(v);
-                    }
-
-                    else {
-                        ;
-                    }
                 }
 
                 // Leger ...
-                else if (modus.equals("Leger")){
+                else if (innlesningsModus.equals("Leger")){
 
-                    // Ikke spesialist
-                    if (biter[1].equals("0")){
+                    lesInnLege(linje);
 
-                        Lege l = new Lege(biter[0]);
-                        leger.leggTil(l);
-                    }
-
-                    // Spesialist
-                    else {
-                        Spesialist s = new Spesialist(biter[0], biter[1]);
-                        leger.leggTil(s);
-                    }
                 }
 
-                else if (modus.equals("Resepter")){
-                    // Finn lege
+                // Skriv resept
+                else if (innlesningsModus.equals("Resepter")){
 
-                    boolean legeFunnet = false;
-                    Lege aktuellLege = null;
-
-                    while (!legeFunnet){
-                        for (Lege l: leger){
-                            if (biter[1].equals(l.hentNavn())){
-                            
-                                legeFunnet = true;
-                                aktuellLege = l;
-
-                            }
-                    }
-
-                    // Skriv resept
+                    lesInnResept(linje);
                 }
 
                 else {
+
                     System.out.println("Error");
                 }
                 
             }
 
-
-
         }
 
     
     }
+
+    public void lesInnPasient(String linje){
+    
+        // Oppdeling av linjen
+        String[] biter = linje.split(",");
+        String navn = biter[0];
+        String fnr = biter[1];
+        
+        Pasient p = new Pasient(navn, fnr);
+        pasienter.leggTil(p);
+    }
+
+    public void lesInnLegemiddel(String linje){
+    
+        // Oppdeling av linjen
+        String[] biter = linje.split(",");
+        String navn = biter[0];
+        String type = biter[1];
+        int pris = Integer.parseInt(biter[2]);
+        double virkestoff = Double.parseDouble(biter[3]);
+        int styrke = Integer.parseInt(biter[4]);
+
+        if (type.equals("vanlig")){
+
+            Vanlig v = new Vanlig(navn, pris, virkestoff);
+            legemidler.leggTil(v);
+        }
+
+        else if (type.equals("narkotisk")){
+            
+            Narkotisk n = new Narkotisk(navn, pris, virkestoff, styrke);
+            legemidler.leggTil(n);
+        }
+
+        else if (type.equals("vanedannende")){
+
+            Vanedannende v = new Vanedannende(navn, pris, virkestoff, styrke);
+            legemidler.leggTil(v);
+        }
+    }
+
+    public void lesInnLege(String linje){
+    
+        // Oppdeling av linjen
+        String[] biter = linje.split(",");
+        String navn = biter[0];
+        String kontrollid = biter[1];
+
+
+        // Ikke spesialist
+        if (kontrollid.equals("0")){
+
+            Lege l = new Lege(navn);
+            leger.leggTil(l);
+        }
+
+        // Spesialist
+        else {
+            Spesialist s = new Spesialist(navn, kontrollid);
+            leger.leggTil(s);
+        }
+    }
+
+    public void lesInnResept(String linje){
+    
+        // Oppdeling av linjen
+        String[] biter = linje.split(",");
+        int legemiddelNummer = Integer.parseInt(biter[0]);
+        String legeNavn = biter[1];
+        int pasientID = Integer.parseInt(biter[2]);
+        String type = biter[3];
+        int reit = Integer.parseInt(biter[4]); // OBS finnes ikke alltid
+
+        // Finn lege
+
+        boolean legeFunnet = false;
+        Lege aktuellLege = null;
+
+        while (!legeFunnet){
+            for (Lege l: leger){
+                if (biter[1].equals(l.hentNavn())){
+                
+                    legeFunnet = true;
+                    aktuellLege = l;
+
+                }
+            }
+        }
+    }
+
 }
 
