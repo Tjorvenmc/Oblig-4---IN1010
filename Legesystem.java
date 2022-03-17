@@ -9,9 +9,9 @@ public class Legesystem{
     IndeksertListe<Lege> leger = new IndeksertListe<>();
 
     /**
-     * KONSTRUKTOER
+     * LES IN FRA FIL
      */
-    public Legesystem(String filnavn) throws FileNotFoundException{
+    public void lesInnFraFil(String filnavn) throws FileNotFoundException{
          
         // Opprette scanner-objekt
         File innlesningsFil = new File(filnavn);
