@@ -36,6 +36,10 @@ public class Pasient{
     
     }
 
+    public int hentId(){
+    
+        return this.id;
+    }
     /**
      * TO DO: toString-metode
      */
