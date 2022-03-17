@@ -143,24 +143,164 @@ public class Legesystem{
         String legeNavn = biter[1];
         int pasientID = Integer.parseInt(biter[2]);
         String type = biter[3];
-        int reit = Integer.parseInt(biter[4]); // OBS finnes ikke alltid
+        int reit = 0;
+
+        if (!type.equals("militaer")){
+            reit = Integer.parseInt(biter[4]);
+        }
+
 
         // Finn lege
+        Lege utskrivendeLege = finnLege(legeNavn);
 
+
+        // Hvis ikke lege funnet ...
+        if (utskrivendeLege == null){
+            System.out.println("Lege ikke funnet"); // TEMP
+        }
+        
+        // Lege funnet  
+        // --> skriv resept
+        else {
+
+            // Finner legemiddel
+            Legemiddel legemiddelPaaResept = finnLegemiddel(legemiddelNummer);
+
+            // Finner pasient
+            Pasient pasientPaaResept = finnPasient(pasientID);
+        
+            // Skriver resept
+            if (type.equals("militaer")){
+
+                try{
+                    utskrivendeLege.skrivMilResept(legemiddelPaaResept, pasientPaaResept);
+                }
+
+                catch (Exception e){
+                
+                    System.out.println("Test"); // TEMP
+                }
+            }
+
+            else if (type.equals("hvit")){
+
+                try{
+                utskrivendeLege.skrivHvitResept(legemiddelPaaResept, pasientPaaResept,
+                         reit);
+                }
+
+                catch (Exception e){
+                
+                    System.out.println("Test");
+                }
+            }
+
+            else if (type.equals("blaa")){
+
+                try{
+                utskrivendeLege.skrivBlaaResept(legemiddelPaaResept, pasientPaaResept,
+                        reit);
+                }
+                
+                catch (Exception e){
+                
+                    System.out.println("Test");
+                }
+            }
+
+            else if (type.equals("p")){
+
+                try{
+                utskrivendeLege.skrivPResept(legemiddelPaaResept, pasientPaaResept,
+                        reit);
+                }
+
+                catch (Exception e){
+                
+                    System.out.println("Test");
+                }
+            }
+            
+        }
+    }
+
+    public Lege finnLege(String navn){
+    
         boolean legeFunnet = false;
         Lege aktuellLege = null;
+        int i = 0;
 
-        while (!legeFunnet){
+        while (!legeFunnet && i < leger.stoerrelse()){
             for (Lege l: leger){
-                if (biter[1].equals(l.hentNavn())){
+
+                i++;
+                if (navn.equals(l.hentNavn())){
                 
                     legeFunnet = true;
                     aktuellLege = l;
-
                 }
             }
         }
+
+        if (!legeFunnet){
+            return null;
+        }
+
+        return aktuellLege;
     }
+
+    public Legemiddel finnLegemiddel(int id){
+
+        boolean legemiddelFunnet = false;
+        Legemiddel aktuellLegemiddel = null;
+        int i = 0;
+
+        while (!legemiddelFunnet && i < legemidler.stoerrelse()){
+            for (Legemiddel l: legemidler){
+
+                i++;
+                if (id == l.hentId()){
+                
+                    legemiddelFunnet = true;
+                    aktuellLegemiddel = l;
+                }
+            }
+        }
+
+        if (!legemiddelFunnet){
+            return null;
+        }
+
+        return aktuellLegemiddel;
+    
+    }
+
+    public Pasient finnPasient(int id){
+
+        boolean pasientFunnet = false;
+        Pasient aktuellPasient = null;
+        int i = 0;
+
+        while (!pasientFunnet && i < pasienter.stoerrelse()){
+            for (Pasient p: pasienter){
+
+                i++;
+                if (id == p.hentId()){
+                
+                    pasientFunnet = true;
+                    aktuellPasient = p;
+                }
+            }
+        }
+
+        if (!pasientFunnet){
+            return null;
+        }
+
+        return aktuellPasient;
+    
+    }
+
 
 }
 
