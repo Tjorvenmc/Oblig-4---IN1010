@@ -182,7 +182,7 @@ public class Legesystem{
 
                 catch (Exception e){
                 
-                    System.out.println("Test"); // TEMP
+                    System.out.println(e); // TEMP
                 }
             }
 
@@ -195,7 +195,7 @@ public class Legesystem{
 
                 catch (Exception e){
                 
-                    System.out.println("Test");
+                    System.out.println(e);
                 }
             }
 
@@ -208,7 +208,7 @@ public class Legesystem{
                 
                 catch (Exception e){
                 
-                    System.out.println("Test");
+                    System.out.println(e);
                 }
             }
 
@@ -221,7 +221,7 @@ public class Legesystem{
 
                 catch (Exception e){
                 
-                    System.out.println("Test");
+                    System.out.println(e);
                 }
             }
             
