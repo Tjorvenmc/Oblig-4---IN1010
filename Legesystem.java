@@ -4,9 +4,9 @@ import java.io.FileNotFoundException;
 
 public class Legesystem{
 
-    IndeksertListe<Pasient> pasienter;
-    IndeksertListe<Legemiddel> legemidler;
-    IndeksertListe<Lege> leger;
+    IndeksertListe<Pasient> pasienter = new IndeksertListe<>();
+    IndeksertListe<Legemiddel> legemidler = new IndeksertListe<>();
+    IndeksertListe<Lege> leger = new IndeksertListe<>();
 
     /**
      * KONSTRUKTOER
@@ -92,7 +92,11 @@ public class Legesystem{
         String type = biter[1];
         int pris = Integer.parseInt(biter[2]);
         double virkestoff = Double.parseDouble(biter[3]);
-        int styrke = Integer.parseInt(biter[4]);
+        int styrke = 0;
+
+        if (biter.length == 5){
+             styrke = Integer.parseInt(biter[4]);
+        }
 
         if (type.equals("vanlig")){
 
