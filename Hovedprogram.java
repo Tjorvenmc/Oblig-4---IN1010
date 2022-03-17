@@ -4,8 +4,10 @@ public class Hovedprogram{
 
     public static void main(String[] args){
 
-        try{
-        Legesystem ls = new Legesystem("legedata_test.txt");
+        Legesystem ls = new Legesystem();
+
+        try {
+            ls.lesInnFraFil("legedata_test.txt");
         }
 
         catch (FileNotFoundException e){
