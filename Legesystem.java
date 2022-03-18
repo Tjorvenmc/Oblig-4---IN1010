@@ -20,9 +20,12 @@ public class Legesystem{
         String innlesningsModus = null;
 
         // Gaa gjennom linjene i filene
+        int linjeNummer = 0; // Hjelper med feilretting i inputfiler
+
         while (sc.hasNextLine()){
             
             String linje = sc.nextLine();
+            linjeNummer++;
 
             // Linjen begynner med #
             // --> setter innlesningsModus
@@ -37,34 +40,66 @@ public class Legesystem{
                 // Pasienter ...
                 if (innlesningsModus.equals("Pasienter")){
 
-                    lesInnPasient(linje);
+                    try{
+
+                        lesInnPasient(linje);
+
+                    }
+
+                    catch (Exception e){
+                    
+                        skrivUtFeilmelding(linjeNummer, e, innlesningsModus, linje);
+                    }
 
                 }
 
                 // Legemidler ...
                 else if (innlesningsModus.equals("Legemidler")){
 
-                    lesInnLegemiddel(linje);
+                    try{
+
+                        lesInnLegemiddel(linje);
+
+                    }
+
+                    catch (Exception e){
+                    
+                        skrivUtFeilmelding(linjeNummer, e, innlesningsModus, linje);
+                    }
 
                 }
 
                 // Leger ...
                 else if (innlesningsModus.equals("Leger")){
 
-                    lesInnLege(linje);
+                    try{
+
+                        lesInnLege(linje);
+
+                    }
+
+                    catch (Exception e){
+                    
+                        skrivUtFeilmelding(linjeNummer, e, innlesningsModus, linje);
+                    }
 
                 }
 
                 // Skriv resept
                 else if (innlesningsModus.equals("Resepter")){
 
-                    lesInnResept(linje);
+                    try{
+
+                        lesInnResept(linje);
+
+                    }
+
+                    catch (Exception e){
+                    
+                        skrivUtFeilmelding(linjeNummer, e, innlesningsModus, linje);
+                    }
                 }
 
-                else {
-
-                    System.out.println("Error");
-                }
                 
             }
 
@@ -303,6 +338,14 @@ public class Legesystem{
 
         return aktuellPasient;
     
+    }
+
+    public void skrivUtFeilmelding(int linjeNummer, Exception e, String innlesningsModus, String linje){
+    
+        System.out.println("Linje " + linjeNummer + ": Feil linjeformat for " + innlesningsModus + ":");
+        System.out.println("Linjen \"" + linje + "\" produserte feilmelding:");
+        System.out.println("\"" + e + "\"");
+        System.out.println(" --> Hopper over linje " + linjeNummer + ".");
     }
 
 
