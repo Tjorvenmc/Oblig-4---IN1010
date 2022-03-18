@@ -13,9 +13,8 @@ public class Hovedprogram{
         catch (FileNotFoundException e){
             System.out.println("Fil ikke funnet");
         }
-     
 
+        ls.hovedmeny();
     }
-
 }    
 
