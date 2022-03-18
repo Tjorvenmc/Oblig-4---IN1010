@@ -310,7 +310,7 @@ public class Legesystem{
         System.out.println(l);
         IndeksertListe<Resept> resepter = l.hentResepter();
         System.out.println(l.hentNavn() + " har skrevet ut " +
-        "foelgende resepter: \n");
+        "foelgende resepter: ");
         if(resepter.stoerrelse() == 0){
           System.out.println("Ingen resepter er skrevet ut.\n");
         }
