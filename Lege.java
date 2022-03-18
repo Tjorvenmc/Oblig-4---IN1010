@@ -1,5 +1,5 @@
 public class Lege implements Comparable<Lege> {
-     
+
     String navn;
     IndeksertListe<Resept> utskrevneResepter;
     Lege selvReferanse = this;
@@ -14,7 +14,7 @@ public class Lege implements Comparable<Lege> {
 
     public String hentNavn(){
         return this.navn;
-    } 
+    }
 
     public String toString(){
         return "Lege " + this.navn + ".";
@@ -30,16 +30,17 @@ public class Lege implements Comparable<Lege> {
         return utskrevneResepter;
     }
 
-   
+
     //har foreloepig brukt reseptId som posisjon i leggTil-metoden. Usikker paa om dette har noe for seg, men lar det
-    //staa intil videre. 
+    //staa intil videre.
     public HvitResept skrivHvitResept (Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift {
         if (legemiddel instanceof Narkotisk) {
             throw new UlovligUtskrift(selvReferanse, legemiddel);
         }
-        
+
         HvitResept hvitResept = new HvitResept(legemiddel, selvReferanse, pasient, reit);
         utskrevneResepter.leggTil(hvitResept);
+        pasient.leggTilResept(hvitResept);
         return hvitResept;
 
     }
@@ -48,25 +49,27 @@ public class Lege implements Comparable<Lege> {
         if (legemiddel instanceof Narkotisk) {
             throw new UlovligUtskrift(selvReferanse, legemiddel);
         }
-        
+
         MilResept milResept = new MilResept(legemiddel, selvReferanse, pasient);
         utskrevneResepter.leggTil(milResept);
+        pasient.leggTilResept(milResept);
         return milResept;
 
     }
-    
+
     public PResept skrivPResept (Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift {
         if (legemiddel instanceof Narkotisk) {
             throw new UlovligUtskrift(selvReferanse, legemiddel);
         }
-        
+
         PResept pResept = new PResept(legemiddel, selvReferanse, pasient, reit);
         utskrevneResepter.leggTil(pResept);
+        pasient.leggTilResept(pResept);
         return pResept;
 
     }
 
-    
+
     public BlaaResept skrivBlaaResept (Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift {
         BlaaResept blaaResept;
 
@@ -75,11 +78,12 @@ public class Lege implements Comparable<Lege> {
                 throw new UlovligUtskrift(selvReferanse, legemiddel);
             }
         }
-    
+
         //Maa sjekke om testen virkelig stopper etter det throwes
         blaaResept = new BlaaResept(legemiddel, selvReferanse, pasient, reit);
-        utskrevneResepter.leggTil(blaaResept);            
-    
+        utskrevneResepter.leggTil(blaaResept);
+        pasient.leggTilResept(blaaResept);
+
         return blaaResept;
     }
 }
