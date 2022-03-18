@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.FileNotFoundException;
 
 public class Legesystem{
@@ -349,9 +351,24 @@ public class Legesystem{
         System.out.println(" --> Hopper over linje " + linjeNummer + ".");
     }
 
-    public void skrivTilFil(){
-    
-        ;
+    public void skrivTilFil() throws IOException{
+
+        FileWriter fw = new FileWriter("utskrift.txt");
+
+        fw.write("# Pasienter (navn, fnr)");
+
+        for (Pasient p:pasienter){
+            fw.write("\n" + p);
+        }
+        
+        fw.write("\n# Legemidler (navn,type,pris,virkestoff,[styrke])");
+
+        fw.write("\n# Leger (navn,kontrollid / 0 hvis vanlig lege)");
+
+        fw.write("\n# Resepter (legemiddelNummer,legeNavn,pasientID,type,[reit])");
+
+        fw.close();
+
     }
 
 

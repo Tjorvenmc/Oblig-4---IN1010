@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Hovedprogram{
 
@@ -12,6 +13,14 @@ public class Hovedprogram{
 
         catch (FileNotFoundException e){
             System.out.println("Fil ikke funnet");
+        }
+
+        try {
+            ls.skrivTilFil();
+        }
+
+        catch (IOException e) {
+            System.out.println(e);
         }
      
 

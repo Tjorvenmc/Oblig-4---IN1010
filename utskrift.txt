@@ -1,0 +1,12 @@
+# Pasienter (navn, fnr)
+Pasient Jens Hans Olsen (11111143521)
+Resepter:
+Pasient Petrolina Swiq (24120099343)
+Resepter:
+Pasient Sven Svendsen (10111224244)
+Resepter:
+Pasient Juni Olsen (21049563451)
+Resepter:
+# Legemidler (navn,type,pris,virkestoff,[styrke])
+# Leger (navn,kontrollid / 0 hvis vanlig lege)
+# Resepter (legemiddelNummer,legeNavn,pasientID,type,[reit])
