@@ -4,9 +4,9 @@ import java.io.FileNotFoundException;
 
 public class Legesystem{
 
-    IndeksertListe<Pasient> pasienter = new IndeksertListe<>();
+    Koe<Pasient> pasienter = new Koe<>();
     IndeksertListe<Legemiddel> legemidler = new IndeksertListe<>();
-    IndeksertListe<Lege> leger = new IndeksertListe<>();
+    Prioritetskoe<Lege> leger = new Prioritetskoe<>();
 
     /**
      * LES IN FRA FIL
