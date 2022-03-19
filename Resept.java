@@ -78,4 +78,13 @@ public abstract class Resept{
 
         return standardInfo;
     }
+
+    public String eksportString(){
+    
+        String s = ","; // seperator
+        String svarString = this.legemiddel.hentId() + s + this.utskrivendeLege
+            + this.pasient.hentId();
+
+        return svarString;
+    }
 }
