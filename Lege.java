@@ -82,4 +82,12 @@ public class Lege implements Comparable<Lege> {
     
         return blaaResept;
     }
+
+    public String eksportString(){
+    
+        String s = ","; // seperator
+        String svarString = this.navn + "," + "0";
+
+        return svarString;
+    }
 }
