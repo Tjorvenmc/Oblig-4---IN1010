@@ -59,6 +59,31 @@ public abstract class Legemiddel{
         this.virkestoff = virkestoff;
         this.id = sisteId;
     }
+
+    public String eksportString(){
+
+        String s = ","; // seperator
+        String type = null;
+        
+        if (this instanceof Vanlig){
+        
+            type = "vanlig";
+        }
+        else if (this instanceof Narkotisk){
+        
+            type = "narkotisk";
+        }
+        else if (this instanceof Vanedannende){
+        
+            type = "vanedannende";
+        }
+
+        String svarString = this.navn + s + type + s + this.pris + s
+            + this.virkestoff;
+
+        return svarString;
+
+    }
 }    
 
 
