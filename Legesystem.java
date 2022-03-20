@@ -355,12 +355,12 @@ public class Legesystem{
 
         while (!svar) {
             System.out.println("\nMeny:");
-            System.out.println("\nSkriv ut oversikt (tast 1)"+
-                                "\nOpprett og legg til i system (tast 2)"+
-                                "\nBruk resept (tast 3)"+
-                                "\nSkriv ut statistikk (tast 4)"+
-                                "\nSkriv alle data til fil (tast 5)"+
-                                "\nAvslutt (tast 0)");
+            System.out.println("\nTast (1) Skriv ut oversikt"+
+                                "\nTast (2) Opprett og legg til i system"+
+                                "\nTast (3) Bruk resept"+
+                                "\nTast (4) Skriv ut statistikk"+
+                                "\nTast (5) Skriv alle data til fil\n"+
+                                "\nTast (0) Avslutt");
                                                 
             input = inn.nextLine();
         
@@ -392,7 +392,7 @@ public class Legesystem{
             //Avslutte programmet
             else if (input.equals("0")) {
                 svar = true;
-                System.out.println("\nProgrammet avsluttes");
+                System.out.println("\nProgrammet avsluttes.");
             }
 
             else {
@@ -411,20 +411,44 @@ public class Legesystem{
         Scanner inn = new Scanner(System.in);
         String input;
 
-        System.out.println("\nHvilken pasient vil du se resepter for:");
+        System.out.println("\nHvilken pasient vil du se resepter for:\n");
         
         //Liste over pasienter
         int indeks = 1;
         for (Pasient p: pasienter) {
-            System.out.println("\ntast(" + (String.valueOf(indeks)) + ")" +
-                                "\n"+p.toString());
+            System.out.println("Tast (" + (String.valueOf(indeks)) + ") " +p.toString());
             indeks ++;
         }
         
         input = inn.nextLine();
 
         if (Integer.parseInt(input) < indeks && Integer.parseInt(input) > 0) {
+            for (Pasient p: pasienter) {
+                if (p.hentId() == Integer.parseInt(input)) {
 
+                    //Liste over resepter
+                    System.out.println("\nHvilken resept vil du bruke: \n");
+
+                    indeks = 1;
+                    for (Resept r: p.hentResepter()) {
+                        System.out.println("Tast (" + (String.valueOf(indeks)) + ") " + r.hentLegemiddel().hentNavn() + ". Reit igjen: "+r.hentReit());
+                        indeks ++;
+                    }
+
+                    input = inn.nextLine();
+
+                    //Bruker resept
+                    if (Integer.parseInt(input) < indeks && Integer.parseInt(input) > 0) {
+                        for (Resept r: p.hentResepter()) {
+                            if (r.hentId() == Integer.parseInt(input)) {
+                                r.bruk();
+                                System.out.println("\nBrukte resept paa "+ r.hentLegemiddel().hentNavn() + ". Antall gjenvaerende reit: "+ r.hentReit());
+                                hovedmeny();
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         else {
@@ -443,13 +467,15 @@ public class Legesystem{
         String input;
         
         System.out.println("\nVelg hva du onsker aa legge til i systemet:");
-        System.out.println("\nPasient (tast: 1)"+
-                            "\nLege (tast: 2)"+
-                            "\nLegemiddel (tast: 3)"+
-                            "\nResept (tast: 4");
+        System.out.println("\nTast (1) Pasient"+
+                            "\nTast (2) Lege"+
+                            "\nTast (3) Legemiddel"+
+                            "\nTast (4) Resept\n"+
+                            "\nTast (0) Tilbake til hovedmeny");
         
         input = inn.nextLine();
         
+        //Legge til pasient
         if (input.equals("1")) {
             System.out.println("\nSkriv inn pasientens navn:");
             String navn = inn.nextLine();
@@ -457,35 +483,52 @@ public class Legesystem{
             System.out.println("\nSkriv inn pasientens fodselsnummer (11 siffer):");
             String fnr = inn.nextLine();
 
+            if (!(fnr.length() == 11)) {
+                System.out.println("\nUgyldig fodselsnummer. Vennligst prov paa nytt.");
+                System.out.println("____________________________________________");
+                menyLeggTil();
+            }
+
             String linje = (navn + "," + fnr);
             lesInnPasient(linje);
         }
 
+        //Legge til lege
         else if (input.equals("2")) {
             System.out.println("\nSkriv inn legens etternavn: ");
             String navn = inn.nextLine();
             
+            //Sjekk om lege har kontrollID, hvis ikke kontrollID = 0
             System.out.println("\nEr legen spesialist: (ja/nei)");
-            input = inn.nextLine();
+            input = inn.nextLine().toLowerCase();
             String kontrollID = "0";
-
+            
+            //Kontrollerer at brukeren enten svarer ja eller nei.
             if (input.equals("ja")) {
                 System.out.println("\nSkriv inn kontrollID: ");
                 kontrollID = inn.nextLine();
+            }
+
+            else if (!(input.equals("nei"))) {
+                System.out.println("\nUgyldig svar. Vennligst prov paa nytt.");
+                System.out.println("____________________________________________");
+                menyLeggTil();
             }
     
             String linje = ("Dr. " + navn + "," + kontrollID);
             lesInnLege(linje);
         }
 
+        //Legge til legemiddel
         else if (input.equals("3")) {
             String styrke = "";
             System.out.println("\nSkriv inn legemiddelets navn: ");
             String navn = inn.nextLine();
-            
+
+            //Sjekker om vanedannende eller narkotisk, faar da parameter med styrke
             System.out.println("\nEr legemiddelet vanedannende (tast v) eller narkotisk (tast n):"+
-                                "\nHvis ikke, (tast q):");
-            input = inn.nextLine();
+                                "\nHvis ikke, tast en valgfri tast:");
+            input = inn.nextLine().toLowerCase();
             String type = "vanlig";
 
             if (input.equals("v")) {
@@ -523,6 +566,11 @@ public class Legesystem{
         else if (input.equals("4")) {
             String linje;
 
+            /*
+            **
+            Her burde vi kanskje ha legemiddel-navn i stedet. Hvordan loeser vi dette evt...
+            **
+            */
             System.out.println("\nSkriv inn onsket legemiddel-nummer: ");
             String legemiddelNr = inn.nextLine();
 
@@ -533,12 +581,41 @@ public class Legesystem{
             String pasientID = inn.nextLine();
 
             System.out.println("\nVelg type resept:");
-            System.out.println("\nPResept (tast p)"+
-                                "\nmilitaer (tast m)"+
-                                "\nblaa (tast b)"+
-                                "\nhvit(tast h)");
-            String type = inn.nextLine();
+            System.out.println("\nTast (p) PResept"+
+                                "\nTast (m) Militaer"+
+                                "\nTast (b) Blaa"+
+                                "\nTast (h) Hvit\n"+
+                                "\nTast (q) Tilbake til hovedmeny");
+            
+            String type = inn.nextLine().toLowerCase();
 
+            if (type.equals("p")) {
+                type = "p";
+            }
+
+            else if (type.equals("m")) {
+                type = "militaer";
+            }
+
+            else if (type.equals("b")) {
+                type = "blaa";
+            }
+
+            else if (type.equals("h")) {
+                type = "hvit";
+            }
+
+            else if (type.equals("q")) {
+                hovedmeny();
+            }
+
+            else {
+                System.out.println("\nUgyldig input. Vennligst prov paa nytt.");
+                System.out.println("____________________________________________");
+                menyLeggTil();
+            }
+
+            //Unngaar at militaer faar argumentet reit.
             if (!type.equals("militaer")) {
                 System.out.println("\nSkriv inn onsket reit:");
                 String reit = inn.nextLine();
@@ -547,10 +624,19 @@ public class Legesystem{
 
             else {
                 linje = (legemiddelNr + ",Dr." + navn + "," + pasientID + "," + type);
-
             }
 
             lesInnResept(linje);
+        }
+
+        else if (input.equals("0")) {
+            hovedmeny();
+        }
+
+        else {
+            System.out.println("\nUgyldig input. Vennligst prov paa nytt.");
+            System.out.println("____________________________________________");
+            menyLeggTil();
         }
         
         //Avslutter scanner.
@@ -558,4 +644,3 @@ public class Legesystem{
         hovedmeny();
     } 
 }
-

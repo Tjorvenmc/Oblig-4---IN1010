@@ -40,21 +40,14 @@ public class Pasient{
     
         return this.id;
     }
-    /**
-     * TO DO: toString-metode
-     */
-    @Override
+
+    public IndeksertListe<Resept> hentResepter() {
+        return resepter;
+    }
+    
     public String toString(){
     
-        String svarString = "Pasient " + this.navn + " (" + this.fnr + ")";
-        svarString += "\nResepter:";
-
-        for (Resept r:this.resepter){
-
-            svarString += "\n";
-            svarString += r.toString();
-        }
-
+        String svarString = "Pasient: " + this.navn + " (fnr: " + this.fnr + ")";
 
         return svarString;
     }
