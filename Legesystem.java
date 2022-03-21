@@ -612,6 +612,7 @@ public class Legesystem{
                 System.out.println("\nUgyldig svar. Vennligst prov paa nytt.");
                 System.out.println("____________________________________________");
                 menyLeggTil();
+                return;
             }
 
             String linje = ("Dr. " + navn + "," + kontrollID);
@@ -681,7 +682,7 @@ public class Legesystem{
             for (Legemiddel lm: legemidler){
 
                 System.out.println(lm.hentId() + " - "+ lm.hentNavn());
-            
+
             }
             String legemiddelNr = nyScannerInput();
 
@@ -718,12 +719,14 @@ public class Legesystem{
 
             else if (type.equals("q")) {
                 hovedmeny();
+                return;
             }
 
             else {
                 System.out.println("\nUgyldig input. Vennligst prov paa nytt.");
                 System.out.println("____________________________________________");
                 menyLeggTil();
+                return;
             }
 
             //Unngaar at militaer faar argumentet reit.
@@ -742,12 +745,14 @@ public class Legesystem{
 
         else if (input.equals("0")) {
             hovedmeny();
+            return;
         }
 
         else {
             System.out.println("\nUgyldig input. Vennligst prov paa nytt.");
             System.out.println("____________________________________________");
             menyLeggTil();
+            return;
         }
         hovedmeny();
     }
