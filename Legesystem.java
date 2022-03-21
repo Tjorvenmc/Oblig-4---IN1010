@@ -68,7 +68,7 @@ public class Legesystem{
 
                     catch (Exception e){
 
-                        skrivUtFeilmelding(linjeNummer, e, innlesningsModus, 
+                        skrivUtFeilmelding(linjeNummer, e, innlesningsModus,
                                 linje);
                     }
 
@@ -85,7 +85,7 @@ public class Legesystem{
 
                     catch (Exception e){
 
-                        skrivUtFeilmelding(linjeNummer, e, innlesningsModus, 
+                        skrivUtFeilmelding(linjeNummer, e, innlesningsModus,
                                 linje);
                     }
 
@@ -102,7 +102,7 @@ public class Legesystem{
 
                     catch (Exception e){
 
-                        skrivUtFeilmelding(linjeNummer, e, innlesningsModus, 
+                        skrivUtFeilmelding(linjeNummer, e, innlesningsModus,
                                 linje);
                     }
                 }
@@ -157,7 +157,7 @@ public class Legesystem{
         String navn = biter[0];
         String type = biter[1];
 
-        if (!(type.equals("vanlig") || type.equals("narkotisk") 
+        if (!(type.equals("vanlig") || type.equals("narkotisk")
                     || type.equals("vanedannende")))
             {
             throw new UgyldigInnlestLinje(linje);
@@ -216,20 +216,20 @@ public class Legesystem{
         if (kontrollid.equals("0")){
             Lege l = new Lege(navn);
             leger.leggTil(l);
-        } 
-        
+        }
+
         else {
             Spesialist s = new Spesialist(navn, kontrollid);
             leger.leggTil(s);
         }
-        
+
         System.out.println("...Legen er lagt til systemet");
     }
-        
+
 
     public void lesInnResept(String linje)throws UgyldigInnlestLinje{
         System.out.print("Forsoeker aa lese inn resept i systemet...");
-        
+
         // Oppdeling av linjen
         String[] biter = linje.split(",");
 
@@ -242,7 +242,7 @@ public class Legesystem{
         int pasientID = Integer.parseInt(biter[2]);
         String type = biter[3];
 
-        if (!(type.equals("hvit") || type.equals("blaa") 
+        if (!(type.equals("hvit") || type.equals("blaa")
                     || type.equals("militaer") ||
             type.equals("p"))){
                 throw new UgyldigInnlestLinje(linje);
@@ -322,7 +322,7 @@ public class Legesystem{
             else if (type.equals("p")){
 
                 try{
-                  Resept r = utskrivendeLege.skrivPResept(legemiddelPaaResept, 
+                  Resept r = utskrivendeLege.skrivPResept(legemiddelPaaResept,
                           pasientPaaResept, reit);
                   resepter.leggTil(r);
                 }
@@ -334,7 +334,7 @@ public class Legesystem{
             }
 
         }
-        
+
         System.out.println("...Resepten er lagt til systemet");
     }
 
@@ -414,10 +414,10 @@ public class Legesystem{
         return aktuellPasient;
     }
 
-    public void skrivUtFeilmelding(int linjeNummer, Exception e, 
+    public void skrivUtFeilmelding(int linjeNummer, Exception e,
             String innlesningsModus, String linje){
 
-        System.out.println("Linje " + linjeNummer + ": Feil linjeformat for " 
+        System.out.println("Linje " + linjeNummer + ": Feil linjeformat for "
                 + innlesningsModus + ":");
         System.out.println("Linjen \"" + linje + "\" produserte feilmelding:");
         System.out.println("\"" + e + "\"");
@@ -502,7 +502,7 @@ public class Legesystem{
         //Liste over pasienter
         int indeks = 1;
         for (Pasient p: pasienter) {
-            System.out.println("Tast (" + (String.valueOf(indeks)) + ") " 
+            System.out.println("Tast (" + (String.valueOf(indeks)) + ") "
                     + p.toString());
             indeks ++;
         }
@@ -521,12 +521,12 @@ public class Legesystem{
             return;
         }
 
-        if (Integer.parseInt(brukerInput) < indeks 
+        if (Integer.parseInt(brukerInput) < indeks
                 && Integer.parseInt(brukerInput) > 0) {
 
             for (Pasient p: pasienter) {
-                
-                if ((p.hentId() == Integer.parseInt(brukerInput) 
+
+                if ((p.hentId() == Integer.parseInt(brukerInput)
                             && (p.hentResepter().stoerrelse() != 0))) {
                     //Liste over resepter
                     System.out.println("\nHvilken resept vil du bruke: \n");
@@ -534,8 +534,8 @@ public class Legesystem{
                     indeks = 1;
 
                     for (Resept r: p.hentResepter()) {
-                        System.out.println("Tast (" + (String.valueOf(indeks)) 
-                                + ") " + r.hentLegemiddel().hentNavn() 
+                        System.out.println("Tast (" + (String.valueOf(indeks))
+                                + ") " + r.hentLegemiddel().hentNavn()
                                 + ". Reit igjen: "+r.hentReit());
                         indeks ++;
                     }
@@ -554,13 +554,13 @@ public class Legesystem{
                     }
 
                     //Bruker resept
-                    if (Integer.parseInt(brukerInput) < indeks 
+                    if (Integer.parseInt(brukerInput) < indeks
                             && Integer.parseInt(brukerInput) > 0) {
                         for (Resept r: p.hentResepter()) {
                             if (r.hentId() == Integer.parseInt(brukerInput)) {
                                 if (r.bruk()){
                                     System.out.println("\nBrukte resept paa "
-                                            + r.hentLegemiddel().hentNavn() 
+                                            + r.hentLegemiddel().hentNavn()
                                             + ". Antall gjenvaerende reit: "
                                             + r.hentReit());
                                     hovedmeny();
@@ -578,9 +578,9 @@ public class Legesystem{
                     }
                 }
 
-                else if ((p.hentId() == Integer.parseInt(brukerInput) 
+                else if ((p.hentId() == Integer.parseInt(brukerInput)
                             && p.hentResepter().stoerrelse() == 0)){
-                    System.out.println("Ingen resepter for gjeldende pasient" 
+                    System.out.println("Ingen resepter for gjeldende pasient"
                             + p + ". Gaar tilbake til hovedmeny.");
                     hovedmeny();
                 }
@@ -659,7 +659,7 @@ public class Legesystem{
                 lesInnLege(linje);
             }
             catch (UgyldigInnlestLinje e){
-                System.out.println("Feil i input." 
+                System.out.println("Feil i input."
                         + "Eksempel for riktig format: Fransen,12345");
             }
         }
@@ -671,7 +671,7 @@ public class Legesystem{
             String navn = nyScannerInput();
 
             //Sjekker om vanedannende eller narkotisk, faar da parameter med styrke
-            System.out.println("\nEr legemiddelet vanedannende (tast v) " 
+            System.out.println("\nEr legemiddelet vanedannende (tast v) "
                    +"eller narkotisk (tast n):"+
                                 "\nHvis ikke, tast en valgfri tast:");
             input = nyScannerInput().toLowerCase();
@@ -700,7 +700,7 @@ public class Legesystem{
             String linje = (navn + "," + type + "," + pris + "," + virkestoff);
 
             if (type.equals("vanedannende" ) || type.equals("narkotisk")){
-                linje = (navn + "," + type + "," + pris + "," + virkestoff 
+                linje = (navn + "," + type + "," + pris + "," + virkestoff
                         + "," + styrke);
             }
 
@@ -775,12 +775,12 @@ public class Legesystem{
             if (!type.equals("militaer")) {
                 System.out.println("\nSkriv inn onsket reit:");
                 String reit = nyScannerInput();
-                linje = (legemiddelNr + ",Dr. " + navn + "," + pasientID 
+                linje = (legemiddelNr + ",Dr. " + navn + "," + pasientID
                         + "," + type + "," + reit);
             }
 
             else {
-                linje = (legemiddelNr + ",Dr." + navn + "," + pasientID 
+                linje = (legemiddelNr + ",Dr." + navn + "," + pasientID
                         + "," + type);
             }
             System.out.println(linje);
@@ -812,9 +812,9 @@ public class Legesystem{
                 tellerN ++;
             }
         }
-        System.out.println("Totalt antall utskrevne resepter med vanedannende legemidler: " 
-                + tellerV 
-                + "\nTotalt antall utskrevne resepter med narkotiske legemidler: " 
+        System.out.println("Totalt antall utskrevne resepter med vanedannende legemidler: "
+                + tellerV
+                + "\nTotalt antall utskrevne resepter med narkotiske legemidler: "
                 + tellerN);
 
         Prioritetskoe<String> legeListeNarkotiskeResepter = new Prioritetskoe<>();
@@ -909,9 +909,9 @@ public class Legesystem{
                 System.out.println("Ingen resepter er skrevet ut.\n");
             }
             for (Resept r: resepter){
-                System.out.println("Til pasient: " + r.hentPasient().hentNavn());
-                System.out.println(r);
-                System.out.println("Legemiddelet i resepten er av type: " +
+                System.out.println("\tTil pasient: " + r.hentPasient().hentNavn());
+                System.out.println("\t" + r);
+                System.out.println("\tLegemiddelet i resepten er av type: " +
                 r.hentLegemiddel().getClass().getName() + "\n");
             }
         }
@@ -919,13 +919,13 @@ public class Legesystem{
         //Skriver ut pasienter
         System.out.println("Pasienter i systemet: \n");
         for (Pasient p: pasienter){
-            System.out.println(p + "\n");
+            System.out.println(p);
         }
 
         //skriver ut legemidler
-        System.out.println("Legemidler i systemet: \n");
+        System.out.println("\nLegemidler i systemet: \n");
         for (Legemiddel l: legemidler){
-            System.out.println(l + "\n");
+            System.out.println(l);
         }
     }
 }
