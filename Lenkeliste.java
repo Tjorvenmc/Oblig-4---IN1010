@@ -23,13 +23,13 @@ abstract class Lenkeliste<T> implements Liste<T> {
         public boolean hasNext(){
             return pos < stoerrelse();
         }
-        
+
         @Override
         public T next(){
             pos++;
             return hentNode(pos - 1).data;
         }
-    
+
     }
 
     /**
@@ -83,7 +83,7 @@ abstract class Lenkeliste<T> implements Liste<T> {
         if (this.start == null){
             throw new UgyldigListeindeks(-1);
         }
-        
+
         else{
             T res = start.data;
             return res;
@@ -95,7 +95,7 @@ abstract class Lenkeliste<T> implements Liste<T> {
      * det.
      */
     public T fjern() throws UgyldigListeindeks{
-        
+
         // Hvis listen er tom...
         if (this.start == null){
             throw new UgyldigListeindeks(0);
@@ -135,9 +135,9 @@ abstract class Lenkeliste<T> implements Liste<T> {
 
         return res;
     }
-        
+
     /**
-     * Dette er en hjelpemetode som sjekker om argumentet pos er en 
+     * Dette er en hjelpemetode som sjekker om argumentet pos er en
      * gyldig indeks gitt metoden som skal utfoeres og listens aktuelle tilstand.
      */
     public boolean gyldigIndeks(int indeks, String metode){
