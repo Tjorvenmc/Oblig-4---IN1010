@@ -391,7 +391,7 @@ public class Legesystem{
 
             //Skrive ut statistikk
             else if (brukerInput.equals("4")) {
-                //Skrive ut forskjellige former for statistikk (Oppgave E6)
+                skrivUtStatistikk();
             }
 
             //Skrive data til fil
@@ -642,6 +642,43 @@ public class Legesystem{
             menyLeggTil();
         }
         hovedmeny();
+    }
+
+    public void skrivUtStatistikk(){
+        int tellerV = 0;
+        int tellerN = 0;
+        for (Resept r: resepter){
+            if (r.hentLegemiddel().getClass().getName().equals("Vanedannende")){
+                tellerV ++;
+            }
+            else if (r.hentLegemiddel().getClass().getName().equals("Narkotisk")){
+                tellerN ++;
+            }
+        }
+        System.out.println("Totalt antall utskrevne resepter med vanedannende legemidler: " + tellerV +
+                            "\nTotalt antall utskrevne resepter med narkotiske legemidler: " + tellerN);
+
+        Prioritetskoe<String> legeListeNarkotiskeResepter = new Prioritetskoe<>();
+
+        System.out.println("Foelgende leger har skrevet ut resepter med narkotiske legemidler: \n");
+        for (Lege l : leger){
+            int legensTellerN = 0;
+            for (Resept r: l.hentResepter()){
+                if (r.hentLegemiddel().getClass().getName().equals("Narkotisk")){
+                    legensTellerN ++;
+                }
+            }
+
+            if (legensTellerN != 0){
+                String legeAntallN = Integer.toString(legensTellerN);
+                String legeInfo = l.hentNavn() + ": " + legeAntallN;
+                legeListeNarkotiskeResepter.leggTil(legeInfo);
+            }
+        }
+
+        for (String s : legeListeNarkotiskeResepter){
+            System.out.println(s);
+        }
     }
 
     public void skrivTilFil() throws IOException{
