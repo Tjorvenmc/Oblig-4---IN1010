@@ -63,4 +63,10 @@ public class Pasient{
         return svarString;
     }
 
+    public String eksportString(){
+    
+        String svarString = this.navn + "," + this.fnr;
+
+        return svarString;
+    }    
 }
