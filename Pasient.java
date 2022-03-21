@@ -27,25 +27,29 @@ public class Pasient{
     }
 
     /**
-     * Metode for aa legge til resepter. 
+     * Metode for aa legge til resepter.
      * OBS: Spiller posisjonen en rolle? I saa fall maa dette endres.
      */
     public void leggTilResept(Resept resept){
-        
+
         this.resepter.leggTil(resept);
-    
+
     }
 
     public int hentId(){
-    
+
         return this.id;
+    }
+
+    public String hentNavn(){
+      return this.navn;
     }
     /**
      * TO DO: toString-metode
      */
     @Override
     public String toString(){
-    
+
         String svarString = "Pasient " + this.navn + " (" + this.fnr + ")";
         svarString += "\nResepter:";
 
@@ -58,7 +62,11 @@ public class Pasient{
 
         return svarString;
     }
-        
-}    
 
+    public String eksportString(){
+    
+        String svarString = this.navn + "," + this.fnr;
 
+        return svarString;
+    }    
+}
