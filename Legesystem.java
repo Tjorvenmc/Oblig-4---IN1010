@@ -487,7 +487,7 @@ public class Legesystem{
         //Liste over pasienter
         int indeks = 1;
         for (Pasient p: pasienter) {
-            System.out.println("Tast (" + (String.valueOf(indeks)) + ") " 
+            System.out.println("\tTast (" + (String.valueOf(indeks)) + ") " 
                     + p.toString());
             indeks ++;
         }
@@ -519,7 +519,7 @@ public class Legesystem{
                     indeks = 1;
 
                     for (Resept r: p.hentResepter()) {
-                        System.out.println("Tast (" + (String.valueOf(indeks)) 
+                        System.out.println("\nTast (" + (String.valueOf(indeks)) 
                                 + ") " + r.hentLegemiddel().hentNavn() 
                                 + ". Reit igjen: "+r.hentReit());
                         indeks ++;
@@ -891,7 +891,7 @@ public class Legesystem{
         System.out.println(l.hentNavn() + " har skrevet ut " +
         "foelgende resepter: ");
         if(resepter.stoerrelse() == 0){
-          System.out.println("Ingen resepter er skrevet ut.\n");
+          System.out.println("\tIngen resepter er skrevet ut.\n");
         }
         for (Resept r: resepter){
           System.out.println("Til pasient: " + r.hentPasient().hentNavn());
@@ -904,13 +904,13 @@ public class Legesystem{
       //Skriver ut pasienter
       System.out.println("Pasienter i systemet: \n");
       for (Pasient p: pasienter){
-        System.out.println(p + "\n");
+        System.out.println(p);
       }
 
       //skriver ut legemidler
       System.out.println("Legemidler i systemet: \n");
       for (Legemiddel l: legemidler){
-        System.out.println(l + "\n");
+        System.out.println(l);
       }
     }
 }
