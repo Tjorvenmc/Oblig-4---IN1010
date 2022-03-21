@@ -19,6 +19,8 @@ class HvitResept extends Resept{
         super(legemiddel, utskrivendeLege, pasient, reit);
     }
 
+    // Denne metoden genererer en korrekt formatert linje for utskrift
+    // til fil.
     public String eksportString(){
         
         String s = ","; // seperator

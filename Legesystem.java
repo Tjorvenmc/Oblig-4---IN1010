@@ -676,7 +676,13 @@ public class Legesystem{
             Her burde vi kanskje ha legemiddel-navn i stedet. Hvordan loeser vi dette evt...
             **
             */
-            System.out.println("\nSkriv inn onsket legemiddel-nummer: ");
+            System.out.println("\nSkriv inn oensket legemiddel-nummer: ");
+
+            for (Legemiddel lm: legemidler){
+
+                System.out.println(lm.hentId() + " - "+ lm.hentNavn());
+            
+            }
             String legemiddelNr = nyScannerInput();
 
             System.out.println("\nSkriv inn legens etternavn: ");
