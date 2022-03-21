@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Hovedprogram{
 
@@ -17,4 +18,12 @@ public class Hovedprogram{
         ls.hovedmeny();
     }
 }    
+        try {
+            ls.skrivTilFil();
+        }
 
+        catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+}

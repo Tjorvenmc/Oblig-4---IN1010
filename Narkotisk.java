@@ -27,5 +27,15 @@ class Narkotisk extends Legemiddel {
             + this.hentNarkotiskStyrke()
             + ".";
     }
+
+    @Override
+    public String eksportString(){
+        
+        String s = ","; // seperator
+        String svarString = super.eksportString() + s + this.styrke;
+
+        return svarString;
+    
+    }
 }
 

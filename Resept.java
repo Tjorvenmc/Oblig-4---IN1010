@@ -48,11 +48,15 @@ public abstract class Resept{
         return this.reit;
     }
 
+    public Pasient hentPasient(){
+      return this.pasient;
+    }
+
     /**
      * Flere metoder (Oppgave B2)
      */
     public boolean bruk(){
-    
+
         if (this.hentReit() > 0){
             this.reit --;
             return true;}
@@ -67,7 +71,7 @@ public abstract class Resept{
      */
     public String toString(){
 
-        String standardInfo = "Resept " + this.hentId() + " " + 
+        String standardInfo = "Resept " + this.hentId() + " " +
             "(" + this.farge() + ")" + ": "
             + this.legemiddel.hentNavn() + ". "
             + "Reit: " + this.hentReit() + ". "
@@ -77,5 +81,14 @@ public abstract class Resept{
             return "Ugyldig resept!";}
 
         return standardInfo;
+    }
+
+    public String eksportString(){
+    
+        String s = ","; // seperator
+        String svarString = this.legemiddel.hentId() + s + this.utskrivendeLege
+            + this.pasient.hentId();
+
+        return svarString;
     }
 }

@@ -19,5 +19,16 @@ class PResept extends HvitResept{
         }
         return 0;
     }
+
+    @Override
+    public String eksportString(){
+        
+        String s = ","; // seperator
+        String svarString = s + super.eksportString() + s + "p"+ s +
+            this.reit;
+
+        return svarString;
+    
+    }
 }
 

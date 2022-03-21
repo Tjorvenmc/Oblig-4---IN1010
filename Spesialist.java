@@ -19,4 +19,13 @@ class Spesialist extends Lege implements Godkjenningsfritak{
         return "Spesialist " + this.navn + " (KontrollID " + this.kontrollID
             + ").";
     }
+
+    @Override
+    public String eksportString(){
+    
+        String s = ","; // seperator
+        String svarString = this.navn + "," + this.kontrollID;
+
+        return svarString;
+    }
 }
