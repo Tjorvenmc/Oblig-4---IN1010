@@ -484,6 +484,16 @@ public class Legesystem{
 
         String brukerInput = nyScannerInput();
 
+        //sjekker om input er tall.
+        try{
+            int nummer = Integer.parseInt(brukerInput);
+        }
+        catch (NumberFormatException e){
+            System.out.println("Input maa vaere et tall.");
+            menyBrukResept();
+            return;
+        }
+
         if (Integer.parseInt(brukerInput) < indeks && Integer.parseInt(brukerInput) > 0) {
             for (Pasient p: pasienter) {
                 if ((p.hentId() == Integer.parseInt(brukerInput) && (p.hentResepter().stoerrelse() != 0))) {
@@ -491,7 +501,7 @@ public class Legesystem{
                     System.out.println("\nHvilken resept vil du bruke: \n");
 
                     indeks = 1;
-        
+
                     for (Resept r: p.hentResepter()) {
                         System.out.println("Tast (" + (String.valueOf(indeks)) + ") " + r.hentLegemiddel().hentNavn() + ". Reit igjen: "+r.hentReit());
                         indeks ++;
@@ -499,6 +509,16 @@ public class Legesystem{
                     System.out.println("\nTast (0) Hovedmeny");
 
                     brukerInput = nyScannerInput();
+
+                    //sjekker om input er tall.
+                    try{
+                        int nummer = Integer.parseInt(brukerInput);
+                    }
+                    catch (NumberFormatException e){
+                        System.out.println("Input maa vaere et tall.");
+                        menyBrukResept();
+                        return;
+                    }
 
                     //Bruker resept
                     if (Integer.parseInt(brukerInput) < indeks && Integer.parseInt(brukerInput) > 0) {
@@ -521,7 +541,7 @@ public class Legesystem{
                     }
                 }
 
-                else {
+                else if ((p.hentId() == Integer.parseInt(brukerInput) && p.hentResepter().stoerrelse() == 0)){
                     System.out.println("Ingen resepter for gjeldende pasient" + p + ". Gaar tilbake til hovedmeny.");
                     hovedmeny();
                 }
