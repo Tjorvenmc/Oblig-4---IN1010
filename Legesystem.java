@@ -112,6 +112,7 @@ public class Legesystem{
 
     public void lesInnPasient(String linje) throws UgyldigInnlestLinje{
 
+        System.out.print("Forsoeker aa lese inn pasient i systemet...");
         // Oppdeling av linjen
         String[] biter = linje.split(",");
 
@@ -136,9 +137,11 @@ public class Legesystem{
 
         Pasient p = new Pasient(navn, fnr);
         pasienter.leggTil(p);
+        System.out.println("...Pasienten er lagt til systemet");
     }
 
     public void lesInnLegemiddel(String linje)throws UgyldigInnlestLinje{
+        System.out.print("Forsoeker aa lese inn legemiddel i systemet...");
 
         // Oppdeling av linjen
         String[] biter = linje.split(",");
@@ -180,9 +183,12 @@ public class Legesystem{
             Vanedannende v = new Vanedannende(navn, pris, virkestoff, styrke);
             legemidler.leggTil(v);
         }
+
+        System.out.println("...Legemiddelet er lagt til systemet");
     }
 
     public void lesInnLege(String linje){
+        System.out.print("Forsoeker aa lese inn lege i systemet...");
 
         // Oppdeling av linjen
         String[] biter = linje.split(",");
@@ -205,13 +211,20 @@ public class Legesystem{
         if (kontrollid.equals("0")){
             Lege l = new Lege(navn);
             leger.leggTil(l);
-          } else {
+        } 
+        
+        else {
             Spesialist s = new Spesialist(navn, kontrollid);
             leger.leggTil(s);
-          }
         }
+        
+        System.out.println("...Legen er lagt til systemet");
+    }
+        
 
     public void lesInnResept(String linje)throws UgyldigInnlestLinje{
+        System.out.print("Forsoeker aa lese inn resept i systemet...");
+        
         // Oppdeling av linjen
         String[] biter = linje.split(",");
 
@@ -314,6 +327,8 @@ public class Legesystem{
             }
 
         }
+        
+        System.out.println("...Resepten er lagt til systemet");
     }
 
     public Lege finnLege(String navn){
@@ -816,35 +831,35 @@ public class Legesystem{
     //skriver ut alle elementer i systemet (Oppg E3)
     public void skrivUtElementer(){
 
-      //skriver ut leger
-      System.out.println("Leger i systemet: \n");
+        //skriver ut leger
+        System.out.println("Leger i systemet: \n");
 
-      for (Lege l: leger){
-        System.out.println(l);
-        IndeksertListe<Resept> resepter = l.hentResepter();
-        System.out.println(l.hentNavn() + " har skrevet ut " +
-        "foelgende resepter: ");
-        if(resepter.stoerrelse() == 0){
-          System.out.println("Ingen resepter er skrevet ut.\n");
+        for (Lege l: leger){
+            System.out.println(l);
+            IndeksertListe<Resept> resepter = l.hentResepter();
+            System.out.println(l.hentNavn() + " har skrevet ut " +
+                                "foelgende resepter: ");
+            if(resepter.stoerrelse() == 0){
+                System.out.println("Ingen resepter er skrevet ut.\n");
+            }
+            for (Resept r: resepter){
+                System.out.println("Til pasient: " + r.hentPasient().hentNavn());
+                System.out.println(r);
+                System.out.println("Legemiddelet i resepten er av type: " +
+                r.hentLegemiddel().getClass().getName() + "\n");
+            }
         }
-        for (Resept r: resepter){
-          System.out.println("Til pasient: " + r.hentPasient().hentNavn());
-          System.out.println(r);
-          System.out.println("Legemiddelet i resepten er av type: " +
-          r.hentLegemiddel().getClass().getName() + "\n");
+
+        //Skriver ut pasienter
+        System.out.println("Pasienter i systemet: \n");
+        for (Pasient p: pasienter){
+            System.out.println(p + "\n");
         }
-      }
 
-      //Skriver ut pasienter
-      System.out.println("Pasienter i systemet: \n");
-      for (Pasient p: pasienter){
-        System.out.println(p + "\n");
-      }
-
-      //skriver ut legemidler
-      System.out.println("Legemidler i systemet: \n");
-      for (Legemiddel l: legemidler){
-        System.out.println(l + "\n");
-      }
+        //skriver ut legemidler
+        System.out.println("Legemidler i systemet: \n");
+        for (Legemiddel l: legemidler){
+            System.out.println(l + "\n");
+        }
     }
 }
