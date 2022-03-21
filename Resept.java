@@ -84,10 +84,10 @@ public abstract class Resept{
     }
 
     public String eksportString(){
-    
+
         String s = ","; // seperator
-        String svarString = this.legemiddel.hentId() + s + this.utskrivendeLege
-            + this.pasient.hentId();
+        String svarString = this.legemiddel.hentId() + s + this.utskrivendeLege.hentNavn()
+            + s + this.pasient.hentId();
 
         return svarString;
     }

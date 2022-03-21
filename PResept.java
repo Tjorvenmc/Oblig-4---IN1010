@@ -12,8 +12,8 @@ class PResept extends HvitResept{
 
     @Override
     public int prisAaBetale(){
-        
-        int justertPris = this.legemiddel.hentPris() - RABATT; 
+
+        int justertPris = this.legemiddel.hentPris() - RABATT;
         if (justertPris > 0){
             return justertPris;
         }
@@ -22,13 +22,12 @@ class PResept extends HvitResept{
 
     @Override
     public String eksportString(){
-        
+
         String s = ","; // seperator
-        String svarString = s + super.eksportString() + s + "p"+ s +
+        String svarString = super.eksportString() + s + "p"+ s +
             this.reit;
 
         return svarString;
-    
+
     }
 }
-

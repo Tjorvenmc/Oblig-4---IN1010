@@ -668,10 +668,8 @@ public class Legesystem{
 
         fw.write("\n# Resepter (legemiddelNummer,legeNavn,pasientID,type,[reit])");
 
-        for (Pasient p : pasienter){
-          for (Resept r : p.hentResepter()){
+          for (Resept r : resepter){
             fw.write("\n" + r.eksportString());
-          }
         }
 
         fw.close();
