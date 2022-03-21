@@ -186,9 +186,20 @@ public class Legesystem{
 
         // Oppdeling av linjen
         String[] biter = linje.split(",");
+
+        if (biter.length != 2){
+            throw new UgyldigInnlestLinje(linje);
+        }
+
         String navn = biter[0];
         String kontrollid = biter[1];
 
+        try{
+            int nummer = Integer.parseInt(kontrollid);
+        }
+        catch (NumberFormatException e){
+            throw new UgyldigInnlestLinje(linje);
+        }
 
         // Oppretter riktig type  lege ut i fra kontrollid
         if (kontrollid.equals("0")){
@@ -574,7 +585,12 @@ public class Legesystem{
             }
 
             String linje = ("Dr. " + navn + "," + kontrollID);
-            lesInnLege(linje);
+            try{
+                lesInnLege(linje);
+            }
+            catch (UgyldigInnlestLinje e){
+                System.out.println("Feil i input. Eksempel for riktig format: Fransen,12345");
+            }
         }
 
         //Legge til legemiddel

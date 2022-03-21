@@ -8,7 +8,7 @@ public class testSystem{
         Legesystem ls = new Legesystem();
 
         try {
-            ls.lesInnFraFil("legedata_test.txt");
+            ls.lesInnFraFil("legedata.txt");
         }
 
         catch (FileNotFoundException e){
