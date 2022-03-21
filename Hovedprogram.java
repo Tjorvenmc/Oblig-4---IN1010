@@ -8,7 +8,7 @@ public class Hovedprogram{
         Legesystem ls = new Legesystem();
 
         try {
-            ls.lesInnFraFil("legedata_test.txt");
+            ls.lesInnFraFil("legedata.txt");
         }
 
         catch (FileNotFoundException e){
@@ -16,14 +16,5 @@ public class Hovedprogram{
         }
 
         ls.hovedmeny();
-    }
-}    
-        try {
-            ls.skrivTilFil();
-        }
-
-        catch (IOException e) {
-            System.out.println(e);
-        }
     }
 }

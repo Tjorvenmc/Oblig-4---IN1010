@@ -26,7 +26,7 @@ public class Lege implements Comparable<Lege> {
     }
 
     //Returnerer listeobjektene??
-    public IndeksertListe hentResepter() {
+    public IndeksertListe<Resept> hentResepter() {
         return utskrevneResepter;
     }
 
@@ -88,7 +88,7 @@ public class Lege implements Comparable<Lege> {
     }
 
     public String eksportString(){
-    
+
         String s = ","; // seperator
         String svarString = this.navn + "," + "0";
 
