@@ -28,6 +28,8 @@ class Vanedannende extends Legemiddel {
             + ".";
     }
 
+    // Denne metoden genererer en korrekt formatert linje for utskrift
+    // til fil.
     @Override
     public String eksportString(){
         

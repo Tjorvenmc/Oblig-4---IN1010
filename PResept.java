@@ -12,23 +12,26 @@ class PResept extends HvitResept{
 
     @Override
     public int prisAaBetale(){
-        
-        int justertPris = this.legemiddel.hentPris() - RABATT; 
+
+        int justertPris = this.legemiddel.hentPris() - RABATT;
         if (justertPris > 0){
             return justertPris;
         }
         return 0;
     }
 
-    @Override
+    // Denne metoden genererer en korrekt formatert linje for utskrift
+    // til fil.
     public String eksportString(){
         
         String s = ","; // seperator
-        String svarString = s + super.eksportString() + s + "p"+ s +
+        String svarString = this.legemiddel.hentId() + s + 
+            this.utskrivendeLege.hentNavn() + s + 
+            this.pasient.hentId() + s +
+            this.farge() + s +
             this.reit;
 
         return svarString;
     
     }
 }
-

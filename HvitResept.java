@@ -19,11 +19,15 @@ class HvitResept extends Resept{
         super(legemiddel, utskrivendeLege, pasient, reit);
     }
 
-    @Override
+    // Denne metoden genererer en korrekt formatert linje for utskrift
+    // til fil.
     public String eksportString(){
         
         String s = ","; // seperator
-        String svarString = s + super.eksportString() + s + this.farge + s +
+        String svarString = this.legemiddel.hentId() + s + 
+            this.utskrivendeLege.hentNavn() + s + 
+            this.pasient.hentId() + s +
+            this.farge() + s +
             this.reit;
 
         return svarString;

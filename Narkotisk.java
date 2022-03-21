@@ -17,10 +17,12 @@ class Narkotisk extends Legemiddel {
      * @return styrken
      */
     public int hentNarkotiskStyrke(){
+
         return this.styrke;
     }
 
     public String toString(){
+
         return "" + this.hentNavn()
             + " (id " + this.hentId() + ")"
             +": narkotisk legemiddel med styrke "
@@ -28,7 +30,8 @@ class Narkotisk extends Legemiddel {
             + ".";
     }
 
-    @Override
+    // Denne metoden genererer en korrekt formatert linje for utskrift
+    // til fil.
     public String eksportString(){
         
         String s = ","; // seperator

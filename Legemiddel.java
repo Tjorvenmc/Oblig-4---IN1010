@@ -16,10 +16,12 @@ public abstract class Legemiddel{
     protected static int sisteId;
 
     public int hentId(){
+
         return this.id;
     }
 
     public String hentNavn(){
+
         return this.navn;
     }
 
@@ -27,6 +29,7 @@ public abstract class Legemiddel{
      * @param nyPris Leggemiddelets nye pris.
      */
     public void settNyPris(int nyPris){
+
         this.pris = nyPris;
     }
 
@@ -34,6 +37,7 @@ public abstract class Legemiddel{
      * Metode for aa hente ut prisen til legemiddelet. 
      */
     public int hentPris(){
+
         return this.pris;
     }
 
@@ -41,12 +45,13 @@ public abstract class Legemiddel{
      * Metode for aa hente ut virkestoffet til legemiddelet. 
      */
     public double hentVirkestoff(){
+
         return virkestoff;
     }
 
     /**
      * KONSTRUKTOER.
-     * Naar et nytt legemiddel blir opprettet (...) blir sisteId
+     * Naar et nytt legemiddel blir opprettet blir sisteId
      * inkrementert, slik at vi faar en ny unik id som kan gis til
      * legemiddelet.
      */
@@ -60,6 +65,8 @@ public abstract class Legemiddel{
         this.id = sisteId;
     }
 
+    // Denne metoden genererer en korrekt formatert linje for utskrift
+    // til fil.
     public String eksportString(){
 
         String s = ","; // seperator

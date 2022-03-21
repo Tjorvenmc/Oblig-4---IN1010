@@ -1,7 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class Hovedprogram{
+public class testSystem{
 
     public static void main(String[] args){
 
@@ -14,7 +14,6 @@ public class Hovedprogram{
         catch (FileNotFoundException e){
             System.out.println("Fil ikke funnet");
         }
-
         ls.hovedmeny();
     }
 }
