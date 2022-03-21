@@ -20,6 +20,8 @@ class BlaaResept extends Resept{
         return ( (int)(this.legemiddel.hentPris() * RABATTFAKTOR));
     }
 
+    // Denne metoden genererer en korrekt formatert linje for utskrift
+    // til fil.
     public String eksportString(){
         
         String s = ","; // seperator

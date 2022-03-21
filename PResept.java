@@ -20,6 +20,8 @@ class PResept extends HvitResept{
         return 0;
     }
 
+    // Denne metoden genererer en korrekt formatert linje for utskrift
+    // til fil.
     public String eksportString(){
         
         String s = ","; // seperator

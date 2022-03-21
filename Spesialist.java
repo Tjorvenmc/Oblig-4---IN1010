@@ -1,3 +1,6 @@
+/**
+ * Klasse for Spesialister
+ */
 class Spesialist extends Lege implements Godkjenningsfritak{
 
     String kontrollID;
@@ -20,6 +23,8 @@ class Spesialist extends Lege implements Godkjenningsfritak{
             + ").";
     }
 
+    // Denne metoden genererer en korrekt formatert linje for utskrift
+    // til fil.
     @Override
     public String eksportString(){
     

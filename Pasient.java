@@ -1,3 +1,6 @@
+/**
+ * Klasse for pasienter
+ */
 public class Pasient{
 
     // Jeg bruker en static variabel for aa holde styr paa idnumre.
@@ -28,7 +31,6 @@ public class Pasient{
 
     /**
      * Metode for aa legge til resepter.
-     * OBS: Spiller posisjonen en rolle? I saa fall maa dette endres.
      */
     public void leggTilResept(Resept resept){
 
@@ -42,12 +44,15 @@ public class Pasient{
     }
 
     public IndeksertListe<Resept> hentResepter() {
+
         return resepter;
     }
+
     @Override
     public String toString(){
     
-        String svarString = "Pasient: " + this.navn + " (fnr: " + this.fnr + ")";
+        String svarString = "Pasient: " + this.navn + " (fnr: " 
+            + this.fnr + ")";
 
         return svarString;
     }
@@ -56,6 +61,8 @@ public class Pasient{
       return this.navn;
     }
 
+    // Denne metoden genererer en korrekt formatert linje for utskrift
+    // til fil.
     public String eksportString(){
     
         String svarString = this.navn + "," + this.fnr;
