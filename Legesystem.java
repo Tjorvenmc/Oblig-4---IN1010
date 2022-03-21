@@ -110,23 +110,51 @@ public class Legesystem{
 
     }
 
-    public void lesInnPasient(String linje){
+    public void lesInnPasient(String linje) throws UgyldigInnlestLinje{
 
         // Oppdeling av linjen
         String[] biter = linje.split(",");
+
+        if (biter.length != 2){
+            throw new UgyldigInnlestLinje(linje);
+        }
+
         String navn = biter[0];
         String fnr = biter[1];
+
+        if (!(fnr.length() == 11)) {
+            throw new UgyldigInnlestLinje(linje);
+        }
+
+        //Sjekker om fnr er tall
+        try {
+            double nummer = Double.parseDouble(fnr);
+        }
+        catch (NumberFormatException e){
+            throw new UgyldigInnlestLinje(linje);
+        }
 
         Pasient p = new Pasient(navn, fnr);
         pasienter.leggTil(p);
     }
 
-    public void lesInnLegemiddel(String linje){
+    public void lesInnLegemiddel(String linje)throws UgyldigInnlestLinje{
 
         // Oppdeling av linjen
         String[] biter = linje.split(",");
+
+        if (biter.length < 4 || biter.length > 5){
+            throw new UgyldigInnlestLinje(linje);
+        }
+
         String navn = biter[0];
         String type = biter[1];
+
+        if (!(type.equals("vanlig") || type.equals("narkotisk") || type.equals("vanedannende")))
+        {
+            throw new UgyldigInnlestLinje(linje);
+            }
+
         int pris = Integer.parseInt(biter[2]);
         double virkestoff = Double.parseDouble(biter[3]);
         int styrke = 0;
@@ -172,15 +200,27 @@ public class Legesystem{
           }
         }
 
-    public void lesInnResept(String linje){
-
+    public void lesInnResept(String linje)throws UgyldigInnlestLinje{
         // Oppdeling av linjen
         String[] biter = linje.split(",");
+
+        if (biter.length < 4 || biter.length > 5){
+            throw new UgyldigInnlestLinje(linje);
+        }
+
         int legemiddelNummer = Integer.parseInt(biter[0]);
         String legeNavn = biter[1];
         int pasientID = Integer.parseInt(biter[2]);
         String type = biter[3];
+
+        if (!(type.equals("hvit") || type.equals("blaa") || type.equals("militaer") ||
+            type.equals("p"))){
+                throw new UgyldigInnlestLinje(linje);
+            }
+
         int reit = 0;
+
+
 
         if (!type.equals("militaer")){
             reit = Integer.parseInt(biter[4]);
@@ -350,6 +390,7 @@ public class Legesystem{
     }
 
     public String nyScannerInput(){
+        System.out.print("\nValg: ");
         Scanner inn = new Scanner(System.in);
         String input;
 
@@ -386,6 +427,7 @@ public class Legesystem{
 
             //Bruke resept
             else if (brukerInput.equals("3")) {
+                aktivMeny = false;
                 menyBrukResept();
             }
 
@@ -427,6 +469,7 @@ public class Legesystem{
             System.out.println("Tast (" + (String.valueOf(indeks)) + ") " +p.toString());
             indeks ++;
         }
+        System.out.println("\nTast (0) Hovedmeny");
 
         String brukerInput = nyScannerInput();
 
@@ -449,16 +492,23 @@ public class Legesystem{
                     if (Integer.parseInt(brukerInput) < indeks && Integer.parseInt(brukerInput) > 0) {
                         for (Resept r: p.hentResepter()) {
                             if (r.hentId() == Integer.parseInt(brukerInput)) {
-                                r.bruk();
-                                System.out.println("\nBrukte resept paa "+ r.hentLegemiddel().hentNavn() + ". Antall gjenvaerende reit: "+ r.hentReit());
-                                hovedmeny();
+                                if (r.bruk()){
+                                    System.out.println("\nBrukte resept paa "+ r.hentLegemiddel().hentNavn() + ". Antall gjenvaerende reit: "+ r.hentReit());
+                                    hovedmeny();
+                                }
+                                else{
+                                    System.out.println("Resept tom. Ingen reit igjen.");
+                                    menyBrukResept();
+                                }
                             }
                         }
                     }
                 }
             }
         }
-
+        else if (Integer.parseInt(brukerInput) == 0){
+            hovedmeny();
+        }
         else {
             System.out.println("\nUgyldig input. Vennligst prov paa nytt.");
             System.out.println("____________________________________________");
@@ -492,7 +542,13 @@ public class Legesystem{
             }
 
             String linje = (navn + "," + fnr);
-            lesInnPasient(linje);
+            try{
+                lesInnPasient(linje);
+            }
+            catch (UgyldigInnlestLinje e){
+                System.out.println("Ugyldig input");
+            }
+
         }
 
         //Legge til lege
@@ -660,7 +716,7 @@ public class Legesystem{
 
         Prioritetskoe<String> legeListeNarkotiskeResepter = new Prioritetskoe<>();
 
-        System.out.println("Foelgende leger har skrevet ut resepter med narkotiske legemidler: \n");
+        System.out.println("\nFoelgende leger har skrevet ut resepter med narkotiske legemidler: \n");
         for (Lege l : leger){
             int legensTellerN = 0;
             for (Resept r: l.hentResepter()){
@@ -677,7 +733,29 @@ public class Legesystem{
         }
 
         for (String s : legeListeNarkotiskeResepter){
-            System.out.println(s);
+            System.out.println("\t- " + s);
+        }
+
+        Prioritetskoe<String> pasientStringer = new Prioritetskoe<>();
+
+        System.out.println("\nFoelgende pasienter har gyldig resept paa narkotiske legemidler: \n");
+        for (Pasient p : pasienter){
+            int pasientensTellerN = 0;
+            for (Resept r: p.hentResepter()){
+                if (r.hentLegemiddel().getClass().getName().equals("Narkotisk")){
+                    pasientensTellerN ++;
+                }
+            }
+
+            if (pasientensTellerN != 0){
+                String pasientAntallN = Integer.toString(pasientensTellerN);
+                String pasientInfo = p.hentNavn() + ": " + pasientAntallN;
+                pasientStringer.leggTil(pasientInfo);
+            }
+        }
+
+        for (String s : pasientStringer){
+            System.out.println("\t- " + s);
         }
     }
 

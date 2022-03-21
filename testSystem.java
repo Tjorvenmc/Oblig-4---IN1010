@@ -8,15 +8,12 @@ public class testSystem{
         Legesystem ls = new Legesystem();
 
         try {
-            ls.lesInnFraFil("legedata.txt");
+            ls.lesInnFraFil("legedata_test.txt");
         }
 
         catch (FileNotFoundException e){
             System.out.println("Fil ikke funnet");
         }
         ls.hovedmeny();
-        for (Resept r: ls.resepter){
-          System.out.println(r);
-        }
     }
 }
