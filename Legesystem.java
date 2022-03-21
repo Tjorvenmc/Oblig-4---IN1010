@@ -9,6 +9,7 @@ public class Legesystem{
     Koe<Pasient> pasienter = new Koe<>();
     IndeksertListe<Legemiddel> legemidler = new IndeksertListe<>();
     Prioritetskoe<Lege> leger = new Prioritetskoe<>();
+    Stabel<Resept> resepter = new Stabel<>();
 
     /**
      * LES IN FRA FIL
@@ -209,7 +210,8 @@ public class Legesystem{
             if (type.equals("militaer")){
 
                 try{
-                    utskrivendeLege.skrivMilResept(legemiddelPaaResept, pasientPaaResept);
+                    Resept r = utskrivendeLege.skrivMilResept(legemiddelPaaResept, pasientPaaResept);
+                    resepter.leggTil(r);
                 }
 
                 catch (Exception e){
@@ -221,8 +223,9 @@ public class Legesystem{
             else if (type.equals("hvit")){
 
                 try{
-                utskrivendeLege.skrivHvitResept(legemiddelPaaResept, pasientPaaResept,
+                  Resept r = utskrivendeLege.skrivHvitResept(legemiddelPaaResept, pasientPaaResept,
                          reit);
+                  resepter.leggTil(r);
                 }
 
                 catch (Exception e){
@@ -234,8 +237,9 @@ public class Legesystem{
             else if (type.equals("blaa")){
 
                 try{
-                utskrivendeLege.skrivBlaaResept(legemiddelPaaResept, pasientPaaResept,
-                        reit);
+                  Resept r = utskrivendeLege.skrivBlaaResept(legemiddelPaaResept, pasientPaaResept,
+                          reit);
+                  resepter.leggTil(r);
                 }
 
                 catch (Exception e){
@@ -247,8 +251,9 @@ public class Legesystem{
             else if (type.equals("p")){
 
                 try{
-                utskrivendeLege.skrivPResept(legemiddelPaaResept, pasientPaaResept,
+                  Resept r = utskrivendeLege.skrivPResept(legemiddelPaaResept, pasientPaaResept,
                         reit);
+                  resepter.leggTil(r);
                 }
 
                 catch (Exception e){
@@ -349,7 +354,6 @@ public class Legesystem{
         String input;
 
         input = inn.nextLine();
-        //inn.close();
 
         return input;
     }
@@ -558,6 +562,7 @@ public class Legesystem{
             else {
                 linje = (navn + "," + type + "," + pris + "," + virkestoff);
             }
+            System.out.println(linje);
             lesInnLegemiddel(linje);
         }
 
@@ -617,13 +622,13 @@ public class Legesystem{
             if (!type.equals("militaer")) {
                 System.out.println("\nSkriv inn onsket reit:");
                 String reit = nyScannerInput();
-                linje = (legemiddelNr + ",Dr." + navn + "," + pasientID + "," + type + "," + reit);
+                linje = (legemiddelNr + ",Dr. " + navn + "," + pasientID + "," + type + "," + reit);
             }
 
             else {
                 linje = (legemiddelNr + ",Dr." + navn + "," + pasientID + "," + type);
             }
-
+            System.out.println(linje);
             lesInnResept(linje);
         }
 

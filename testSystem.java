@@ -1,9 +1,22 @@
-class testSystem{
-  public static void main(String[] args){
-    Legesystem ls = new Legesystem();
-    String test = ls.nyScannerInput();
-    String test2 = ls.nyScannerInput();
-    System.out.println(test);
-    System.out.println(test2);
-  }
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+public class testSystem{
+
+    public static void main(String[] args){
+
+        Legesystem ls = new Legesystem();
+
+        try {
+            ls.lesInnFraFil("legedata.txt");
+        }
+
+        catch (FileNotFoundException e){
+            System.out.println("Fil ikke funnet");
+        }
+        ls.hovedmeny();
+        for (Resept r: ls.resepter){
+          System.out.println(r);
+        }
+    }
 }
