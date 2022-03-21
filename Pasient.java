@@ -41,26 +41,19 @@ public class Pasient{
         return this.id;
     }
 
-    public String hentNavn(){
-      return this.navn;
+    public IndeksertListe<Resept> hentResepter() {
+        return resepter;
     }
-    /**
-     * TO DO: toString-metode
-     */
     @Override
     public String toString(){
-
-        String svarString = "Pasient " + this.navn + " (" + this.fnr + ")";
-        svarString += "\nResepter:";
-
-        for (Resept r:this.resepter){
-
-            svarString += "\n";
-            svarString += r.toString();
-        }
-
+    
+        String svarString = "Pasient: " + this.navn + " (fnr: " + this.fnr + ")";
 
         return svarString;
+    }
+  
+     public String hentNavn(){
+      return this.navn;
     }
 
     public String eksportString(){

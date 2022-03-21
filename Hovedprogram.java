@@ -15,6 +15,9 @@ public class Hovedprogram{
             System.out.println("Fil ikke funnet");
         }
 
+        ls.hovedmeny();
+    }
+}    
         try {
             ls.skrivTilFil();
         }
@@ -22,7 +25,5 @@ public class Hovedprogram{
         catch (IOException e) {
             System.out.println(e);
         }
-
     }
-
 }
