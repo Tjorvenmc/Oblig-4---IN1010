@@ -20,14 +20,16 @@ class PResept extends HvitResept{
         return 0;
     }
 
-    @Override
     public String eksportString(){
-
+        
         String s = ","; // seperator
-        String svarString = super.eksportString() + s + "p"+ s +
+        String svarString = this.legemiddel.hentId() + s + 
+            this.utskrivendeLege.hentNavn() + s + 
+            this.pasient.hentId() + s +
+            this.farge() + s +
             this.reit;
 
         return svarString;
-
+    
     }
 }

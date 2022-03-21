@@ -65,6 +65,7 @@ public abstract class Resept{
 
     public abstract String farge();
     public abstract int prisAaBetale();
+    public abstract String eksportString();
 
     /**
      * Overskriving av toString-metoden
@@ -83,12 +84,13 @@ public abstract class Resept{
         return standardInfo;
     }
 
-    public String eksportString(){
+    //public String eksportString(){
 
-        String s = ","; // seperator
-        String svarString = this.legemiddel.hentId() + s + this.utskrivendeLege.hentNavn()
-            + s + this.pasient.hentId();
+    //    String s = ","; // seperator
+    //    String svarString = this.legemiddel.hentId() + s + 
+    //        this.utskrivendeLege.hentNavn()
+    //        + s + this.pasient.hentId();
 
-        return svarString;
-    }
+    //    return svarString;
+    //}
 }

@@ -13,12 +13,19 @@ class MilResept extends HvitResept{
         return 0;
     }
 
-
     @Override
+    public String farge(){
+        return "militaer";
+    }
+
     public String eksportString(){
         
         String s = ","; // seperator
-        String svarString = s + super.eksportString() + s + "militaer";
+        String svarString = this.legemiddel.hentId() + s + 
+            this.utskrivendeLege.hentNavn() + s + 
+            this.pasient.hentId() + s +
+            this.farge() + s +
+            this.reit;
 
         return svarString;
     
